@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Scanner;
 import clases.Cliente;
 import clases.Habitacion;
+import clases.Hotel;
 
 /**
  * 
@@ -76,5 +77,34 @@ public class FormularioDeDatos {
 		
 		return id;
 	}
-	
+	public static Hotel datosHotel(Scanner scan) {
+		Hotel hotel = new Hotel();
+		System.out.println("Introduce el CIF: ");
+		hotel.setCif(scan.nextLine());
+		System.out.println("Introduce el nombre del hotel: ");
+		hotel.setNombre(scan.nextLine());
+		System.out.println("Introduce el gerente: ");
+		hotel.setGerente(scan.nextLine());
+		System.out.println("Introduce las estrellas: ");
+		hotel.setEstrellas(Integer.parseInt(scan.nextLine()));
+		System.out.println("Introduce la compania: ");
+		hotel.setCompania(scan.nextLine());
+
+		return hotel;
+	}
+	public static Habitacion datosHabitacion(Scanner scan) {
+		Habitacion habitacion = new Habitacion();
+		System.out.println("Introduce la id de la habitacion: ");
+		habitacion.setId(Integer.parseInt(scan.nextLine()));
+		System.out.println("Introduce la id del hotel: ");
+		habitacion.setId_hotel(Integer.parseInt(scan.nextLine()));
+		System.out.println("Introduce el numero de habitacion: ");
+		habitacion.setNumero(scan.nextLine());
+		System.out.println("Introduce la descripcion de la habitacion: ");
+		habitacion.setDescripcion(scan.nextLine());
+		System.out.println("Introduce el precio: ");
+		habitacion.setPrecio(Double.parseDouble(scan.nextLine()));
+		
+		return habitacion;
+	}
 }

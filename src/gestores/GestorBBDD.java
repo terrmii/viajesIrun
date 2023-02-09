@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import clases.Cliente;
+import clases.Habitacion;
+import clases.Hotel;
 
 public class GestorBBDD {
 	
@@ -53,6 +55,28 @@ public class GestorBBDD {
 		con.conectar();
 		ps = con.getCon().prepareStatement("DELETE FROM reservas WHERE `reservas`.`id` = ?");
 		ps.setInt(1, id);
+		ps.execute();
+	}
+	
+	public void altaHotel(Hotel hotel) throws ClassNotFoundException, SQLException {
+		con.conectar();
+		ps = con.getCon().prepareStatement("INSERT INTO hoteles (cif, nombre, gerente, estrellas, compania) VALUES (?, ?, ? , ?, ?)");
+		ps.setString(1, hotel.getCif());
+		ps.setString(2, hotel.getNombre());
+		ps.setString(3, hotel.getGerente());
+		ps.setInt(4, hotel.getEstrellas());
+		ps.setString(5, hotel.getCompania());
+		ps.execute();
+	}
+	
+	public void altaHabitacion(Habitacion habitacion) throws SQLException, ClassNotFoundException {
+		con.conectar();
+		ps = con.getCon().prepareStatement("INSERT INTO habitaciones VALUES (?, ?, ?, ? , ?)");
+		ps.setInt(1, habitacion.getId());
+		ps.setInt(2, habitacion.getId_hotel());
+		ps.setString(3, habitacion.getNumero());
+		ps.setString(4, habitacion.getDescripcion());
+		ps.setDouble(5, habitacion.getPrecio());
 		ps.execute();
 	}
 }
