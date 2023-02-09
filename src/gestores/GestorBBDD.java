@@ -46,5 +46,13 @@ public class GestorBBDD {
 		ps.setString(2, dni);
 		ps.setDate(3, (java.sql.Date) desde);
 		ps.setDate(4, (java.sql.Date) hasta);
+		ps.execute();
+	}
+	
+	public void anularReserva(int id) throws ClassNotFoundException, SQLException {
+		con.conectar();
+		ps = con.getCon().prepareStatement("DELETE FROM reservas WHERE `reservas`.`id` = ?");
+		ps.setInt(1, id);
+		ps.execute();
 	}
 }

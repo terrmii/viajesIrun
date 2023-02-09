@@ -27,7 +27,7 @@ public class GestorReservas {
 					bbdd.realizarReserva(FormularioDeDatos.pedirIdHabitacion(scan), FormularioDeDatos.pedirDniCliente(scan), FormularioDeDatos.pedirFecha(scan), FormularioDeDatos.pedirFecha(scan));
 					break;
 				case Menu.ANULAR_RESERVA:
-					
+					bbdd.anularReserva(FormularioDeDatos.pedirIdReserva(scan));
 					break;
 				default:
 					Visor.mostrarMensaje(opcion + " no es un valor valido");

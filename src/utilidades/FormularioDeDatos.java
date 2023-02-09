@@ -63,14 +63,18 @@ public class FormularioDeDatos {
 	}
 	
 	public static int pedirIdHabitacion(Scanner scan) {
-		System.out.println("Introduzca la id de la habitacion: ");
-		int opcion = Integer.parseInt(scan.nextLine());
+		System.out.println("Introduzca el id de la habitacion: ");
+		int idHabitacion = Integer.parseInt(scan.nextLine());
+
+	
 		
-		if(opcion == 2) {
-			
-		}
+		return idHabitacion;
+	}
+	public static int pedirIdReserva(Scanner scan) {
+		System.out.println("Introduce la id de la reserva: ");
+		int id = Integer.parseInt(scan.nextLine());
 		
-		return 0;
+		return id;
 	}
 	
 }
