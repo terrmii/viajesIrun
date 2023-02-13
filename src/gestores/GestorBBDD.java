@@ -3,7 +3,9 @@ package gestores;
 import utilidades.Conector;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import clases.Cliente;
@@ -39,6 +41,24 @@ public class GestorBBDD {
 		ps.setString(1, nuevoValor);
 		ps.setString(2, dni);
 		ps.execute();
+	}
+	
+	public ArrayList<Cliente> visualizarCliente() throws ClassNotFoundException, SQLException{
+		con.conectar();
+		ps = con.getCon().prepareStatement("SELECT * from clientes");
+		ResultSet res = ps.executeQuery();
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+		while(res.next()) {
+			Cliente cliente = new Cliente();
+			cliente.setDni(res.getString("dni"));
+			cliente.setNombre(res.getString("nombre"));
+			cliente.setApellidos(res.getString("apellidos"));
+			cliente.setDireccion(res.getString("direccion"));
+			cliente.setLocalidad(res.getString("localidad"));
+			
+			clientes.add(cliente);
+		}
+		return clientes;
 	}
 	
 	public void realizarReserva(int id_habitacion, String dni, Date desde, Date hasta) throws ClassNotFoundException, SQLException {

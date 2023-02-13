@@ -37,6 +37,9 @@ public class GestorClientes {
 				bbdd.modificarCliente(FormularioDeDatos.pedirDniCliente(scan), FormularioDeDatos.pedirModificarCliente(scan), FormularioDeDatos.nuevoValor(scan));
 				
 				break;
+			case Menu.LISTA_CLIENTE:
+				Visor.mostrarClientes(bbdd.visualizarCliente());
+				break;
 			case Menu.ATRAS:
 				new GestorViajes().run();
 			default:
