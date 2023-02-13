@@ -6,7 +6,6 @@ public class Menu {
 		System.out.println("1. Gestionar clientes");
 		System.out.println("2. Gestionar reservas");
 		System.out.println("3. Gestionar hoteles y habitaciones");
-		System.out.println("4. Lista clientes");
 		System.out.println("0. Salir");
 	}
 	
@@ -14,6 +13,7 @@ public class Menu {
 		System.out.println("1. Registrar cliente");
 		System.out.println("2. Dar de baja cliente");
 		System.out.println("3. Modificar cliente");
+		System.out.println("4. Lista clientes");
 		System.out.println("0. Atras");
 	}
 	
