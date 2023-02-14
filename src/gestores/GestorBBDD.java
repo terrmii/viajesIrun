@@ -61,6 +61,45 @@ public class GestorBBDD {
 		return clientes;
 	}
 	
+//	public void comprobarCliente(String comprobar, String atributo) throws ClassNotFoundException, SQLException {
+//		con.conectar();
+//		ps = con.getCon().prepareStatement("SELECT * from clientes WHERE ? = ?");
+//		ps.setString(1, atributo);
+//		ps.setString(2, comprobar);
+//		ps.execute();
+//		
+//	}
+	
+	public ArrayList<Cliente> comprobarCliente(String comprobar, String valor) throws ClassNotFoundException, SQLException {
+		con.conectar();
+		ps = con.getCon().prepareStatement("SELECT * from clientes WHERE ? = ?");
+		ps.setString(1, comprobar);
+		ps.setString(2, valor);
+		ps.execute();
+		
+		ResultSet res = ps.executeQuery();
+		ArrayList<Cliente> clientes = new ArrayList();
+		while(res.next()) {
+			Cliente cliente = new Cliente();
+			cliente.setDni(res.getString("dni"));
+			cliente.setNombre(res.getString("nombre"));
+			cliente.setApellidos(res.getString("apellidos"));
+			cliente.setDireccion(res.getString("direccion"));
+			cliente.setLocalidad(res.getString("localidad"));
+			
+			clientes.add(cliente);
+			if(clientes.contains(comprobar)) {
+				ps = con.getCon().prepareStatement("SELECT * from clientes WHERE ? = ?");
+				ps.setString(1, comprobar);
+				ps.setString(2, valor);
+				ps.execute();
+				
+				return clientes;
+			}
+		}
+		return clientes;
+	}
+	
 	public void realizarReserva(int id_habitacion, String dni, Date desde, Date hasta) throws ClassNotFoundException, SQLException {
 		con.conectar();
 		ps = con.getCon().prepareStatement("INSERT INTO reservas (id_habitacion, dni, desde, hasta) VALUES (?, ?, ?, ?)");

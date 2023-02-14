@@ -107,4 +107,16 @@ public class FormularioDeDatos {
 		
 		return habitacion;
 	}
+	
+	public static String comprobarCliente(Scanner scan) {
+		System.out.println("Que desea comprobar? (DNI, Nombre, Apellidos, direccion, localidad)");
+		String atributo = scan.nextLine();
+		return atributo;
+	}
+	
+	public static String valorCliente(Scanner scan) {
+		System.out.println("Introduzca el valor que desea buscar: ");
+		String comprobar = scan.nextLine();
+		return comprobar;
+	}
 }
