@@ -3,6 +3,7 @@ package utilidades;
 public class Menu {
 	
 	public static void mostrarMenuPrincipal() {
+		System.out.println("---------MENU---------");
 		System.out.println("1. Gestionar clientes");
 		System.out.println("2. Gestionar reservas");
 		System.out.println("3. Gestionar hoteles y habitaciones");
@@ -14,7 +15,7 @@ public class Menu {
 		System.out.println("2. Dar de baja cliente");
 		System.out.println("3. Modificar cliente");
 		System.out.println("4. Lista clientes");
-		System.out.println("5. Comprobar cliente");
+		System.out.println("5. Consultas de clientes");
 		System.out.println("0. Atras");
 	}
 	
@@ -30,6 +31,12 @@ public class Menu {
 		System.out.println("0. Atras");
 	}
 	
+	public static void mostrarMenuConsultasCliente() {
+		System.out.println("1. Ordenar clientes por apellido");
+		System.out.println("2. Ordenar clientes por nombre");
+		System.out.println("0. Atras");
+	}
+	
 	public static final int GESTIONAR_CLIENTES = 1;
 	public static final int GESTIONAR_RESERVAS = 2;
 	public static final int GESTIONAR_HOTELES_HABITACIONES = 3;
@@ -39,13 +46,16 @@ public class Menu {
 	public static final int BAJA_CLIENTE = 2;
 	public static final int MODIFICAR_CLIENTE = 3;
 	public static final int LISTA_CLIENTE = 4;
-	public static final int COMPROBAR_CLIENTE = 5;
+	public static final int CONSULTAS_CLIENTE = 5;
 	
 	public static final int REALIZAR_RESERVA = 1;
 	public static final int ANULAR_RESERVA = 2;
 	
 	public static final int REGISTRAR_HOTEL = 1;
 	public static final int REGISTRAR_HABITACION = 2;
+	
+	public static final int ORDENADO_APELLIDOS = 1;
+	public static final int ORDENADO_NOMBRE = 2;
 	
 	public static final int ATRAS = 0;
 }

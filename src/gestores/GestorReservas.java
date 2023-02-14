@@ -24,6 +24,7 @@ public class GestorReservas {
 				opcion = Integer.parseInt(scan.nextLine());
 				switch (opcion) {
 				case Menu.REALIZAR_RESERVA:
+					Visor.comprobarClientes(bbdd.visualizarCliente(), FormularioDeDatos.comprobarCliente(scan), scan);
 					bbdd.realizarReserva(FormularioDeDatos.pedirIdHabitacion(scan), FormularioDeDatos.pedirDniCliente(scan), FormularioDeDatos.pedirFecha(scan), FormularioDeDatos.pedirFecha(scan));
 					break;
 				case Menu.ANULAR_RESERVA:

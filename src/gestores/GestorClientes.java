@@ -40,8 +40,8 @@ public class GestorClientes {
 			case Menu.LISTA_CLIENTE:
 				Visor.mostrarClientes(bbdd.visualizarCliente());
 				break;
-			case Menu.COMPROBAR_CLIENTE:
-				Visor.mostrarClientes(bbdd.comprobarCliente(FormularioDeDatos.comprobarCliente(scan), FormularioDeDatos.valorCliente(scan)));
+			case Menu.CONSULTAS_CLIENTE:
+				new GestorConsultasCliente().run(scan);
 				break;
 			case Menu.ATRAS:
 				new GestorViajes().run();

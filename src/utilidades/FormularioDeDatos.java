@@ -109,14 +109,9 @@ public class FormularioDeDatos {
 	}
 	
 	public static String comprobarCliente(Scanner scan) {
-		System.out.println("Que desea comprobar? (DNI, Nombre, Apellidos, direccion, localidad)");
+		System.out.println("Introduzca el dni para comprobar el cliente");
 		String atributo = scan.nextLine();
 		return atributo;
 	}
 	
-	public static String valorCliente(Scanner scan) {
-		System.out.println("Introduzca el valor que desea buscar: ");
-		String comprobar = scan.nextLine();
-		return comprobar;
-	}
 }
