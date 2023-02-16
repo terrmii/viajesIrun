@@ -2,8 +2,10 @@ package gestores;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import clases.Cliente;
 import utilidades.Menu;
 import utilidades.Visor;
 
@@ -19,6 +21,8 @@ public class GestorConsultasCliente {
 			switch (opcion) {
 			case Menu.ORDENADO_APELLIDOS:
 				
+				ArrayList<Cliente> clientesA = bbdd.visualizarCliente();
+				Visor.ordenarPorApellido(clientesA);
 				break;
 			case Menu.ORDENADO_NOMBRE:
 				
@@ -28,9 +32,9 @@ public class GestorConsultasCliente {
 				new GestorClientes().run(scan);
 				break;
 			default:
-				Visor.mostrarMensaje(opcion + " no es un valor valido");;
+				Visor.mostrarMensaje(opcion + " no es un valor valido");
 			}
-			
+
 		} while (opcion != 0);
 	}
 

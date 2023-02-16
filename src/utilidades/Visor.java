@@ -3,6 +3,8 @@ package utilidades;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 import clases.Cliente;
@@ -36,9 +38,15 @@ public class Visor {
 				new GestorReservas().run(scan);
 			}
 				
-				
-				
-			
-			
 	}
-}
+		
+		 public static void ordenarPorApellido(ArrayList<Cliente> cliente) {
+		     	cliente.sort((o1, o2) -> o1.getApellidos().compareTo(o2.getApellidos().toLowerCase()));
+		     	;
+		        for (Cliente clientee: cliente) {
+		            System.out.println(clientee.getApellidos() + " | " + clientee.getNombre());
+		        }
+		 }}
+
+		
+
