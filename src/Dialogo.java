@@ -32,7 +32,8 @@ public class Dialogo extends JDialog {
 	private JTextField textFieldDireccion;
 	private JTextField textFieldLocalidad;
 	
-	JButton btnNewButton = new JButton("OK");
+	JButton btnModificar = new JButton("MODIFICAR");
+	JButton btnEliminar = new JButton("ELIMINAR");
 
 	/**
 	 * Launch the application.
@@ -126,8 +127,8 @@ public class Dialogo extends JDialog {
 					textFieldDireccion.setEnabled(true);
 					textFieldLocalidad.setEnabled(true);
 			
-					btnNewButton.setEnabled(true);
-					
+					btnModificar.setEnabled(true);
+					btnEliminar.setEnabled(true);
 				}
 			});
 			contentPanel.add(btnNewButton_1);
@@ -143,10 +144,10 @@ public class Dialogo extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				btnNewButton.setEnabled(false);
+				btnModificar.setEnabled(false);
 				
-				buttonPane.add(btnNewButton);
-				btnNewButton.addActionListener(new ActionListener() {
+				buttonPane.add(btnModificar);
+				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
 						Cliente cliente = new Cliente();
@@ -176,6 +177,32 @@ public class Dialogo extends JDialog {
 						dispose();
 					}
 				});
+				{
+					btnEliminar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							Cliente cliente = new Cliente();
+							cliente.setDni(textFieldDni.getText());
+							cliente.setNombre(textFieldNombre.getText());
+							cliente.setApellidos(textFieldApellidos.getText());
+							cliente.setDireccion(textFieldDireccion.getText());
+							cliente.setLocalidad(textFieldLocalidad.getText());
+							
+							GestorBBDD bbdd = new GestorBBDD();
+							bbdd.bajaCliente(textFieldDni.getText());
+							
+							textFieldDni.setText(null);
+							textFieldNombre.setText(null);
+							textFieldApellidos.setText(null);
+							textFieldDireccion.setText(null);
+							textFieldLocalidad.setText(null);
+							
+							JOptionPane.showMessageDialog(cancelButton, "Cliente eliminado");
+						}
+					});
+					
+					btnEliminar.setEnabled(false);
+					buttonPane.add(btnEliminar);
+				}
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
