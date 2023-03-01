@@ -1,12 +1,15 @@
 package utilidades;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import clases.Cliente;
 import clases.Habitacion;
 import clases.Hotel;
+import gestores.GestorBBDD;
 
 /**
  * 
@@ -114,5 +117,13 @@ public class FormularioDeDatos {
 		return atributo;
 	}
 	
-	
+	public static void comprobarHotel(String nombreHotel, GestorBBDD bbdd, ArrayList<Hotel> hotel) throws ClassNotFoundException, SQLException {
+		
+		for (Hotel hotel2 : hotel) {
+			if(nombreHotel.equals(hotel2.getNombre())) {
+				Visor.mostrarHoteles(bbdd.visualizarHotel());
+			}
+		}
+		
+	}
 }

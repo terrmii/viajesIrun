@@ -17,15 +17,25 @@ public class GestorBBDD {
 	Conector con = new Conector();
 	PreparedStatement ps;
 	
-	public void registrarClientes(Cliente cliente) throws ClassNotFoundException, SQLException {
-		con.conectar();
-		ps = con.getCon().prepareStatement("INSERT INTO clientes (dni, nombre, apellidos, direccion, localidad) VALUES (?, ? , ?, ?, ?)");
-		ps.setString(1, cliente.getDni());
-		ps.setString(2, cliente.getNombre());
-		ps.setString(3, cliente.getApellidos());
-		ps.setString(4, cliente.getDireccion());
-		ps.setString(5, cliente.getLocalidad());
-		ps.execute();
+	public void registrarClientes(Cliente cliente){
+	
+		try {
+			con.conectar();
+			ps = con.getCon().prepareStatement("INSERT INTO clientes (dni, nombre, apellidos, direccion, localidad) VALUES (?, ? , ?, ?, ?)");
+			ps.setString(1, cliente.getDni());
+			ps.setString(2, cliente.getNombre());
+			ps.setString(3, cliente.getApellidos());
+			ps.setString(4, cliente.getDireccion());
+			ps.setString(5, cliente.getLocalidad());
+			ps.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 	
 	public void bajaCliente(String dni) throws ClassNotFoundException, SQLException {
@@ -42,26 +52,100 @@ public class GestorBBDD {
 		ps.setString(2, dni);
 		ps.execute();
 	}
-	
-	public ArrayList<Cliente> visualizarCliente() throws ClassNotFoundException, SQLException{
-		con.conectar();
-		ps = con.getCon().prepareStatement("SELECT * from clientes");
-		ResultSet res = ps.executeQuery();
-		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-		while(res.next()) {
-			Cliente cliente = new Cliente();
-			cliente.setDni(res.getString("dni"));
-			cliente.setNombre(res.getString("nombre"));
-			cliente.setApellidos(res.getString("apellidos"));
-			cliente.setDireccion(res.getString("direccion"));
-			cliente.setLocalidad(res.getString("localidad"));
-			
-			clientes.add(cliente);
+	public void modificarClienteJframe(String dni, Cliente cliente) {
+
+        try {
+            con.conectar();
+           ps = con.getCon().prepareStatement("UPDATE clientes SET nombre= ?, apellidos= ?, direccion= ?, localidad= ? WHERE dni = ?");
+            ps.setString(1, cliente.getNombre());
+            ps.setString(2, cliente.getApellidos());
+            ps.setString(3, cliente.getDireccion());
+            ps.setString(4, cliente.getLocalidad());
+            ps.setString(5, dni);
+
+            ps.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return clientes;
+    }
+	public ArrayList<Cliente> visualizarCliente(){
+		try {
+			con.conectar();
+			ps = con.getCon().prepareStatement("SELECT * from clientes");
+			ResultSet res = ps.executeQuery();
+			ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+			while(res.next()) {
+				Cliente cliente = new Cliente();
+				cliente.setDni(res.getString("dni"));
+				cliente.setNombre(res.getString("nombre"));
+				cliente.setApellidos(res.getString("apellidos"));
+				cliente.setDireccion(res.getString("direccion"));
+				cliente.setLocalidad(res.getString("localidad"));
+				
+				clientes.add(cliente);
+			}
+			return clientes;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	return null;
 	}
 	
+	public Cliente visualizarClienteJFrame(String dni){
+		try {
+			con.conectar();
+			ps = con.getCon().prepareStatement("SELECT * from clientes WHERE dni = ?");
+			ps.setString(1, dni);
+			ResultSet res = ps.executeQuery();
+			ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+			Cliente cliente = new Cliente();
+			while(res.next()) {
 	
+				cliente.setDni(res.getString("dni"));
+				cliente.setNombre(res.getString("nombre"));
+				cliente.setApellidos(res.getString("apellidos"));
+				cliente.setDireccion(res.getString("direccion"));
+				cliente.setLocalidad(res.getString("localidad"));
+				
+				clientes.add(cliente);
+			}
+			return cliente;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	return null;
+	}
+	
+	public ArrayList<Hotel> visualizarHotel() throws ClassNotFoundException, SQLException{
+		con.conectar();
+		ps = con.getCon().prepareStatement("SELECT * from hoteles");
+		ResultSet res = ps.executeQuery();
+		ArrayList<Hotel> hoteles = new ArrayList<Hotel>();
+		while(res.next()) {
+			Hotel hotel = new Hotel();
+			hotel.setId(res.getInt("id"));
+			hotel.setCif(res.getString("cif"));
+			hotel.setCompania(res.getString("compania"));
+			hotel.setEstrellas(res.getInt("estrellas"));
+			hotel.setGerente(res.getString("gerente"));
+			hotel.setNombre(res.getString("nombre"));
+			
+			hoteles.add(hotel);
+		}
+		return hoteles;
+	}
 	public void realizarReserva(int id_habitacion, String dni, Date desde, Date hasta) throws ClassNotFoundException, SQLException {
 		con.conectar();
 		ps = con.getCon().prepareStatement("INSERT INTO reservas (id_habitacion, dni, desde, hasta) VALUES (?, ?, ?, ?)");
@@ -101,22 +185,27 @@ public class GestorBBDD {
 		ps.execute();
 	}
 	
-	public ArrayList<Cliente> ordenarApellido() throws ClassNotFoundException, SQLException{
+	public Boolean nombreHotel(String nombreHotel) throws ClassNotFoundException, SQLException{
 		con.conectar();
 		ps = con.getCon().prepareStatement("SELECT * from clientes");
 		ResultSet res = ps.executeQuery();
-		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-		while(res.next()) {
-			Cliente cliente = new Cliente();
-			cliente.setDni(res.getString("dni"));
-			cliente.setNombre(res.getString("nombre"));
-			cliente.setApellidos(res.getString("apellidos"));
-			cliente.setDireccion(res.getString("direccion"));
-			cliente.setLocalidad(res.getString("localidad"));
-			
-			clientes.add(cliente);
-		}
-		return clientes;
+		ArrayList<Hotel> hoteles = new ArrayList<Hotel>();
+		Boolean existe = false;
 		
+		while(res.next()) {
+			Hotel hotel = new Hotel();
+			hotel.setNombre(res.getString("nombre"));
+			for (Hotel hotell : hoteles) {
+				if(nombreHotel.equals(hotel.getNombre())) {
+					existe = true;
+				}
+			}
+			
+			hoteles.add(hotel);
+		}
+		
+		return existe;
 	}
+	
+
 }
