@@ -1,3 +1,5 @@
+package maven;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -19,8 +21,10 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.ImageIcon;
+import java.awt.Window.Type;
 
-public class VentanasJFrame_bien extends JFrame {
+@SuppressWarnings("serial")
+public class ventanaMain extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldDni;
@@ -36,9 +40,8 @@ public class VentanasJFrame_bien extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
-					
-					VentanasJFrame_bien frame = new VentanasJFrame_bien();
+					UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
+					ventanaMain frame = new ventanaMain();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +53,9 @@ public class VentanasJFrame_bien extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanasJFrame_bien() {
+	public ventanaMain() {
+		setResizable(false);
+		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 371, 272);
 		contentPane = new JPanel();
