@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.Caret;
 
 import clases.Cliente;
 import gestores.GestorBBDD;
@@ -21,6 +22,7 @@ import javax.swing.JTabbedPane;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
+import javax.swing.JTextPane;
 
 @SuppressWarnings("serial")
 public class Dialogo extends JDialog {
@@ -46,7 +48,7 @@ public class Dialogo extends JDialog {
 	 * Create the dialog.
 	 */
 	public Dialogo() {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 547, 341);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -112,7 +114,7 @@ public class Dialogo extends JDialog {
 		}
 		{
 			JButton btnNewButton_1 = new JButton("Cargar datos");
-			btnNewButton_1.setBounds(314, 38, 95, 23);
+			btnNewButton_1.setBounds(281, 38, 95, 23);
 			btnNewButton_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					GestorBBDD bbdd = new GestorBBDD();
@@ -139,6 +141,23 @@ public class Dialogo extends JDialog {
 		TITULO.setFont(new Font("Yu Gothic UI Semilight", Font.BOLD, 17));
 		TITULO.setBounds(35, 11, 374, 14);
 		contentPanel.add(TITULO);
+		
+		JTextPane verClientes = new JTextPane();
+		verClientes.setBounds(281, 76, 240, 169);
+		contentPanel.add(verClientes);
+		
+		JButton btnCargarUsuarios = new JButton("Cargar Usuarios");
+		btnCargarUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//				HACER QUE CARGEN EN EL TEXTO DE ABAJO
+				
+				GestorBBDD bbdd = new GestorBBDD();
+				
+				verClientes.setCaret((Caret) bbdd.visualizarCliente());
+			}
+		});
+		btnCargarUsuarios.setBounds(386, 38, 135, 23);
+		contentPanel.add(btnCargarUsuarios);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
