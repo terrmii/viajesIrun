@@ -38,11 +38,20 @@ public class GestorBBDD {
 	
 	}
 	
-	public void bajaCliente(String dni) throws ClassNotFoundException, SQLException {
-		con.conectar();
-		ps = con.getCon().prepareStatement("DELETE FROM clientes WHERE `clientes`.`dni` = ?");
-		ps.setString(1, dni);
-		ps.execute();
+	public void bajaCliente(String dni){
+		try {
+			con.conectar();
+			ps = con.getCon().prepareStatement("DELETE FROM clientes WHERE `clientes`.`dni` = ?");
+			ps.setString(1, dni);
+			ps.execute();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 	
 	public void modificarCliente(String dni, String modificar, String nuevoValor) throws ClassNotFoundException, SQLException {

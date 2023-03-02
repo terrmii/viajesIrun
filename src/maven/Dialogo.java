@@ -1,3 +1,5 @@
+package maven;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
@@ -9,6 +11,7 @@ import javax.swing.text.Caret;
 
 import clases.Cliente;
 import gestores.GestorBBDD;
+import utilidades.Visor;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,6 +26,8 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
 import javax.swing.JTextPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
 public class Dialogo extends JDialog {
@@ -36,6 +41,7 @@ public class Dialogo extends JDialog {
 	
 	JButton btnModificar = new JButton("MODIFICAR");
 	JButton btnEliminar = new JButton("ELIMINAR");
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -48,7 +54,8 @@ public class Dialogo extends JDialog {
 	 * Create the dialog.
 	 */
 	public Dialogo() {
-		setBounds(100, 100, 547, 341);
+		setResizable(false);
+		setBounds(100, 100, 582, 341);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -142,10 +149,6 @@ public class Dialogo extends JDialog {
 		TITULO.setBounds(35, 11, 374, 14);
 		contentPanel.add(TITULO);
 		
-		JTextPane verClientes = new JTextPane();
-		verClientes.setBounds(281, 76, 240, 169);
-		contentPanel.add(verClientes);
-		
 		JButton btnCargarUsuarios = new JButton("Cargar Usuarios");
 		btnCargarUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -153,11 +156,24 @@ public class Dialogo extends JDialog {
 				
 				GestorBBDD bbdd = new GestorBBDD();
 				
-				verClientes.setCaret((Caret) bbdd.visualizarCliente());
+				
+		
 			}
 		});
 		btnCargarUsuarios.setBounds(386, 38, 135, 23);
 		contentPanel.add(btnCargarUsuarios);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null},
+			},
+			new String[] {
+				"DNI", "Nombre", "Apellido", "Direccion", "Localidad"
+			}
+		));
+		table.setBounds(291, 76, 265, 182);
+		contentPanel.add(table);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
